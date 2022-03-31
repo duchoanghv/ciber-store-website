@@ -1,0 +1,80 @@
+﻿@model OrderDataModel
+
+<div class="form-group row">
+    <label for="inputsearch" class="col-sm-4 col-form-label text-right">Enter category to search</label>
+    <div class="col-sm-5">
+        <input type="text" class="form-control" id="inputsearch" placeholder="category...">
+    </div>
+    <button type="button" class="btn btn-primary sm-3" id="btn-search-order" onclick="OnClickSearchOrder('@Url.Action("DoSearchOrder")')">Search</button>
+</div>
+<div id="orders-grid-view">
+    @Html.Partial("_OrdersList_PartialView", Model.Orders)
+</div>
+<br />
+<div class="form-group row">
+    <button type="button" class="btn btn-link col-sm-12 text-right" data-toggle="modal" data-target="#createOrderModel"><u>Create new order</u></button>
+</div>
+
+<div class="modal fade" id="createOrderModel" tabindex="-1" role="dialog" aria-labelledby="createOrderModelLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="createOrderModelLabel">Create New Order</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="frm-order-infor">
+                    <div class="form-group row">
+                        <label for="Name" class="col-sm-4 col-form-label text-right text-right">Order Name</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" name="Name">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="ProductId" class="col-sm-4 col-form-label text-right">Product</label>
+                        <div class="col-sm-8">
+                            <select class="form-select col-sm-8" aria-label="product" name="ProductId">
+                                @{
+                                    foreach (var pro in Model.Products)
+                                    {
+                                        <option value="@pro.Id">@pro.Name</option>
+                                    }
+                                }
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="message-text" class="col-sm-4 col-form-label text-right">Customer</label>
+                        <div class="col-sm-8">
+                            <select class="form-select col-sm-8" aria-label="customer" name="CustomerId">
+                                @{
+                                    foreach (var pro in Model.Customers)
+                                    {
+                                        <option value="@pro.Id">@pro.Name</option>
+                                    }
+                                }
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="OrderDate" class="col-sm-4 col-form-label text-right">Order Date</label>
+                        <div class="col-sm-8">
+                            <input type='date' class="form-control" name="OrderDate" />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="Amount" class="col-sm-4 col-form-label text-right">Amount</label>
+                        <div class="col-sm-8">
+                            <input type="number" class="form-control" name="Amount" min="0" data-bind="value:replyNumber">
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" onclick="OnClickCreateNewOrder('@Url.Action("DoSaveOrder")')">Create Order</button>
+            </div>
+        </div>
+    </div>
+</div>

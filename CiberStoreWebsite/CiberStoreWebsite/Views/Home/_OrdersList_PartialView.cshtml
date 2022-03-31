@@ -1,0 +1,27 @@
+﻿@model List<OrderModel>
+
+<div class=container>
+    <table cellspacing=0 class="table table-bordered table-hover table-inverse table-striped" id=orders-list width=100%>
+        <thead><tr><th>Product Name<th>Category Name<th>Customer Name<th>Order Date<th>Amount
+        <tbody>
+            @{
+                foreach (OrderModel order in Model)
+                {
+                    <tr>
+                        <td>@order.ProductName
+                        <td>@order.CategoryName
+                        <td>@order.CustomerName
+                        <td>@order.OrderDateDisplay
+                        <td>@order.AmountDisplay
+                    </tr>
+                }
+            }
+    </table>
+</div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#orders-list').DataTable();
+    });
+</script>
+
+
