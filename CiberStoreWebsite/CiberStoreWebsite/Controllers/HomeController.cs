@@ -22,6 +22,7 @@ namespace CiberStoreWebsite.Controllers
         [Authorize]
         public async Task<IActionResult> Index()
         {
+            ViewData["Title"] = "Manage Orders";
             return View(await _orderBll.GetInitialData());
         }
         public async Task<PartialViewResult> DoSearchOrder(string categoryName)
